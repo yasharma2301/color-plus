@@ -1,0 +1,14 @@
+main {
+    -webkit-overflow-scrolling: touch;
+    flex: auto;
+    background:  #f4f4f4;
+    min-height: 100%;
+}
+
+  
+.cards {
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(280px,1fr));
+    gap: 30px;
+}

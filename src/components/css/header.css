@@ -1,0 +1,20 @@
+header {
+    border-bottom: 1px solid #DCDCDC;
+    flex: none;
+}
+
+.navbar{
+    background: #ffffff;
+    height: 60px;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo {
+    height: 40px;
+    width: 40px;
+}
