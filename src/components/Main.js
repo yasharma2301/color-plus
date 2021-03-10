@@ -5,13 +5,14 @@ import './css/color.css'
 import Add from './Add';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
+import { useSubscription } from '@apollo/react-hooks';
 
-const COLOR_QUERY = gql`
-    query Color_Query {
+const COLOR_SUBSCRIPTION = gql`
+    subscription Color_Subscription {
         colors {
-        hex
-        type
-        uid
+            hex
+            type
+            uid
         }
     }
 `
@@ -36,40 +37,43 @@ function Main() {
         }
     }
 
+    const { data, error, loading } = useSubscription(COLOR_SUBSCRIPTION);
+    if (loading) {
+        return <p>Loading...</p>
+    }
+    if (error) {
+        return <p>Error!</p>
+    }
+
     return (
-            <main>
-                <div className="cards container">
-                    <Add></Add>
-                    <Query query={COLOR_QUERY}>
-                        {
-                            ({ loading, error, data }) => {
-                                if (loading) return <p>Loading...</p>
-                                if (error) return <p>Error</p>
-                                return data.colors.map(({ hex, type, uid }, index) => (
-                                    <div key={uid} className="card">
-                                        <div className="card_info">
-                                            <p>{elementId(index)}</p>
-                                            <p>Type: {type}</p>
-                                        </div>
-                                        <div>
-                                            <div style={{ backgroundColor: hex }} className="showcase-color">
-                                            </div>
-                                        </div>
-                                        <div className="card_info">
-                                            <p>
-                                                HEX {hex}
-                                            </p>
-                                            <p>
-                                                {hexToRgb(hex)}
-                                            </p>
-                                        </div>
+        <main>
+            <div className="cards container">
+                <Add></Add>
+                {
+                    data.colors.map(
+                        ({ hex, type, uid }, index) =>
+                            <div key={uid} className="card">
+                                <div className="card_info">
+                                    <p>{elementId(index)}</p>
+                                    <p>Type: {type}</p>
+                                </div>
+                                <div>
+                                    <div style={{ backgroundColor: hex }} className="showcase-color">
                                     </div>
-                                ))
-                            }
-                        }
-                    </Query>
-                </div>
-            </main>
+                                </div>
+                                <div className="card_info">
+                                    <p>
+                                        HEX {hex}
+                                    </p>
+                                    <p>
+                                        {hexToRgb(hex)}
+                                    </p>
+                                </div>
+                            </div>
+                    )
+                }
+            </div>
+        </main>
     )
 }
 
