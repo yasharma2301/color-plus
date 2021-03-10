@@ -17,8 +17,26 @@ const COLOR_QUERY = gql`
 `
 
 function Main() {
+
+    function hexToRgb(hex) {
+        var bigint = parseInt(hex.substring(1), 16);
+        var r = (bigint >> 16) & 255;
+        var g = (bigint >> 8) & 255;
+        var b = bigint & 255;
+        return "RGB " + r + "/" + g + "/" + b;
+    }
+
+    function elementId(n) {
+        if (n < 10) {
+            return "00" + n.toString();
+        } else if (n >= 10 && n < 100) {
+            return "0" + n.toString();
+        } else {
+            return n.toString();
+        }
+    }
+
     return (
-        <div>
             <main>
                 <div className="cards container">
                     <Add></Add>
@@ -27,14 +45,14 @@ function Main() {
                             ({ loading, error, data }) => {
                                 if (loading) return <p>Loading...</p>
                                 if (error) return <p>Error</p>
-                                return data.colors.map(({ hex, type, uid }) => (
+                                return data.colors.map(({ hex, type, uid }, index) => (
                                     <div key={uid} className="card">
                                         <div className="card_info">
-                                            <p>001</p>
+                                            <p>{elementId(index)}</p>
                                             <p>Type: {type}</p>
                                         </div>
                                         <div>
-                                            <div className="showcase-color">
+                                            <div style={{ backgroundColor: hex }} className="showcase-color">
                                             </div>
                                         </div>
                                         <div className="card_info">
@@ -42,7 +60,7 @@ function Main() {
                                                 HEX {hex}
                                             </p>
                                             <p>
-                                                RGB 25 /25 /25
+                                                {hexToRgb(hex)}
                                             </p>
                                         </div>
                                     </div>
@@ -52,7 +70,6 @@ function Main() {
                     </Query>
                 </div>
             </main>
-        </div>
     )
 }
 

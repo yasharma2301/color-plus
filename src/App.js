@@ -7,19 +7,20 @@ import Colors from './components/Colors';
 import Header from './components/Header';
 import Main from './components/Main';
 import Footer from './components/Footer';
+import apolloClient from './apolloSetup'
 
-const secret = 'mKkmS5B1DfRVT3NHsGMQOfNJ2CQEnFJHQZRGjfR2LfxWKtUiMx2Mff0367JBIjcZ';
+// const secret = 'mKkmS5B1DfRVT3NHsGMQOfNJ2CQEnFJHQZRGjfR2LfxWKtUiMx2Mff0367JBIjcZ';
 
-const client = new ApolloClient({
-  uri: "https://easy-mite-79.hasura.app/v1/graphql",
-  headers: {
-    'x-hasura-access-key': `${secret}`
-  }
-})
+// const client = new ApolloClient({
+//   uri: "https://easy-mite-79.hasura.app/v1/graphql",
+//   headers: {
+//     'x-hasura-access-key': `${secret}`
+//   }
+// })
 
 function App() {
   return (
-    <ApolloProvider client={client}>
+    <ApolloProvider client={apolloClient}>
       <div className="App">
         <Header></Header>
         <Main></Main>

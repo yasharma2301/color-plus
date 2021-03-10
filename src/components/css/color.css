@@ -26,5 +26,5 @@
     width: 220px;
     height: 220px;
     padding: 10px;
-    background-color: #002240;
+    border: 1px solid var(--outline-color);
 }
