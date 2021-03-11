@@ -7,7 +7,6 @@ import {COLOR_SUBSCRIPTION} from './QlRequests';
 
 
 function Main() {
-
     const { data, error, loading } = useSubscription(COLOR_SUBSCRIPTION);
 
     if (loading) {

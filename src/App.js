@@ -6,15 +6,6 @@ import Main from './components/Main';
 import Footer from './components/Footer';
 import apolloClient from './apolloSetup'
 
-// const secret = 'mKkmS5B1DfRVT3NHsGMQOfNJ2CQEnFJHQZRGjfR2LfxWKtUiMx2Mff0367JBIjcZ';
-
-// const client = new ApolloClient({
-//   uri: "https://easy-mite-79.hasura.app/v1/graphql",
-//   headers: {
-//     'x-hasura-access-key': `${secret}`
-//   }
-// })
-
 function App() {
   return (
     <ApolloProvider client={apolloClient}>

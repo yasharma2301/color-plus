@@ -53,7 +53,7 @@ function Colors({ uid, hex, type, index }) {
                 <div className="delete-color">
                     {
                         deleteLoader ? <Loader size={20} color='#74b1a1'></Loader>
-                            : <img src={del} onClick={() => clickHandler(uid)}></img>
+                            : <img src={del} alt="X" onClick={() => clickHandler(uid)}></img>
                     }
                 </div>
 

@@ -6,7 +6,6 @@ import Loader from './Loader'
 import {ADD_COLOR} from './QlRequests';
 
 function Add() {
-
     const [addColor] = useMutation(ADD_COLOR);
     const [loading, setLoading] = useState(false)
 
