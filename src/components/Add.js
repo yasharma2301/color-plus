@@ -6,9 +6,11 @@ import Loader from './Loader'
 import { ADD_COLOR } from './QlRequests';
 
 function Add() {
+    // hooks
     const [addColor] = useMutation(ADD_COLOR);
     const [loading, setLoading] = useState(false)
 
+    // Utility function to generate random color and type
     function generateRandomColor() {
         var randomHex = "#"+(Math.random()*0xFFFFFF<<0).toString(16);
         var typeArray = ["Background", "Neutral", "Primary", "Secondary"]
@@ -21,6 +23,7 @@ function Add() {
         };
     }
 
+    // Function to add new random color to the pallete
     async function clickHandler(event) {
         event.preventDefault();
         setLoading(true)
@@ -34,6 +37,7 @@ function Add() {
         setLoading(false)
     }
 
+    // store new color data in local storage
     function storeData(uid, type, hex) {
         var obj = { hex: hex, type: type }
         localStorage.setItem(uid, JSON.stringify(obj))

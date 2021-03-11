@@ -7,6 +7,7 @@ import { InMemoryCache } from 'apollo-boost';
 
 const secret = 'mKkmS5B1DfRVT3NHsGMQOfNJ2CQEnFJHQZRGjfR2LfxWKtUiMx2Mff0367JBIjcZ';
 
+// web socket link for apollo stream subscription
 const wsLink = new WebSocketLink({
   uri: 'wss://easy-mite-79.hasura.app/v1/graphql',
   options: {
@@ -19,6 +20,7 @@ const wsLink = new WebSocketLink({
   }
 });
 
+// apollo http link for mutations and queries
 const httpLink = new HttpLink({
   uri: 'https://easy-mite-79.hasura.app/v1/graphql',
   headers: {
@@ -26,6 +28,7 @@ const httpLink = new HttpLink({
   }
 });
 
+// split based on the request passed {webSocket/http}
 const link = split(
   ({ query }) => {
     const definition = getMainDefinition(query);
@@ -38,6 +41,8 @@ const link = split(
   httpLink,
 );
 
+// instantiate a client 
+// use in memory cache so that client can respond to repeated query without sending unnecessary requests
 export default new ApolloClient({
   cache: new InMemoryCache(),
   link

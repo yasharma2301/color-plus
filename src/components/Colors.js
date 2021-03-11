@@ -8,11 +8,13 @@ import { TYPE_UPDATE, DELETE_COLOR } from './QlRequests';
 
 function Colors({ uid, hex, type, index }) {
 
+    // hooks
     const [updateType] = useMutation(TYPE_UPDATE);
     const [deleteColor] = useMutation(DELETE_COLOR);
     const [deleteLoader, setLoading] = useState(false)
     const [hovering, setHover] = useState(false)
 
+    // Utility function to generate RGB codes from a given hex code
     function hexToRgb(hex) {
         var bigint = parseInt(hex.substring(1), 16);
         var r = (bigint >> 16) & 255;
@@ -21,6 +23,7 @@ function Colors({ uid, hex, type, index }) {
         return "RGB " + r + "/" + g + "/" + b;
     }
 
+    // Function to generate serial number from index number
     function elementId(n) {
         if (n < 10) {
             return "00" + n.toString();
@@ -31,6 +34,7 @@ function Colors({ uid, hex, type, index }) {
         }
     }
 
+    // Function to update the type of color on press of enter-key
     function handleData(event, uid) {
         if (event.key === "Enter") {
             try {
@@ -46,11 +50,13 @@ function Colors({ uid, hex, type, index }) {
         }
     }
 
+    // update local storage with new data
     function updateLocalStorage(uid, type, hex) {
         var obj = { hex: hex, type: type }
         localStorage.setItem(uid, JSON.stringify(obj))
     }
 
+    // Function to delete color from the pallete
     async function clickHandler(uid) {
         setLoading(true)
         try {
@@ -62,11 +68,12 @@ function Colors({ uid, hex, type, index }) {
         setLoading(false)
     }
 
+    // delete data from local storage
     function deleteFromLocalStorage(uid) {
         localStorage.removeItem(uid)
     }
 
-
+    // Set state based on hovering over color cards
     function handleMouseHover() {
         setHover(prev => !prev);
     }

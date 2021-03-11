@@ -7,6 +7,7 @@ import {COLOR_SUBSCRIPTION} from './QlRequests';
 
 
 function Main() {
+    // apollo stream subscription for real time data
     const { data, error, loading } = useSubscription(COLOR_SUBSCRIPTION);
 
     if (loading) {

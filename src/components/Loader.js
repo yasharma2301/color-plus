@@ -2,6 +2,7 @@ import React from 'react'
 import HashLoader from "react-spinners/HashLoader";
 import { css } from '@emotion/core'
 
+// Custom css to loader using emotion package
 const loaderCss = css`
     position: absolute;
     left: 50%;
