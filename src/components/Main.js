@@ -14,7 +14,7 @@ function Main() {
     }
     if (error) {
         return <div className="center">
-            <h1>Aww Snap!<br></br> Something went wrong</h1>
+            <h1>Aww Snap!<br></br>Something went wrong</h1>
             <p>{error}</p>
         </div>
     }

@@ -32,9 +32,9 @@
 }
 
 .delete-color {
-    background: #d6d6d688;
-    width: 35px;
-    height: 35px;
+    background: #e7e7e7bb;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     text-align: center;
     vertical-align: middle;
@@ -61,7 +61,7 @@ input {
     -ms-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    background: #f2f2f2;
+    background: #e7e7e7ee;
     padding: 6px;
     border-radius: 6px;
     width: 150px;

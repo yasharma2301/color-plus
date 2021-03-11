@@ -4,13 +4,14 @@ import { useMutation } from '@apollo/react-hooks';
 import del from './assets/delete.png';
 import './css/main.css'
 import Loader from './Loader'
-import {TYPE_UPDATE, DELETE_COLOR} from './QlRequests';
+import { TYPE_UPDATE, DELETE_COLOR } from './QlRequests';
 
 function Colors({ uid, hex, type, index }) {
 
     const [updateType] = useMutation(TYPE_UPDATE);
     const [deleteColor] = useMutation(DELETE_COLOR);
     const [deleteLoader, setLoading] = useState(false)
+    const [hovering, setHover] = useState(false)
 
     function hexToRgb(hex) {
         var bigint = parseInt(hex.substring(1), 16);
@@ -32,16 +33,44 @@ function Colors({ uid, hex, type, index }) {
 
     function handleData(event, uid) {
         if (event.key === "Enter") {
-            updateType({ variables: { uid: uid, type: event.target.value } })
+            try {
+                updateType({ variables: { uid: uid, type: event.target.value } })
+                    .then((res) => {
+                        const data = res.data.update_colors.returning;
+                        updateLocalStorage(data[0].uid, data[0].type, data[0].hex);
+                    })
+            } catch (err) {
+                console.log(err)
+            }
             event.target.blur();
         }
     }
 
+    function updateLocalStorage(uid, type, hex) {
+        var obj = { hex: hex, type: type }
+        localStorage.setItem(uid, JSON.stringify(obj))
+    }
+
     async function clickHandler(uid) {
         setLoading(true)
-        await deleteColor({ variables: { uid: uid } })
+        try {
+            const deletedItem = await deleteColor({ variables: { uid: uid } })
+            deleteFromLocalStorage(deletedItem.data.delete_colors_by_pk.uid)
+        } catch (err) {
+            console.log(err)
+        }
         setLoading(false)
     }
+
+    function deleteFromLocalStorage(uid) {
+        localStorage.removeItem(uid)
+    }
+
+
+    function handleMouseHover() {
+        setHover(prev => !prev);
+    }
+
 
     return (
         <div key={uid} className="card">
@@ -50,16 +79,21 @@ function Colors({ uid, hex, type, index }) {
                 <div className="label">
                     <input id={`input-${uid}`} defaultValue={type} placeholder="Enter Label" onKeyPress={(event) => handleData(event, uid)}></input>
                 </div>
-                <div className="delete-color">
-                    {
-                        deleteLoader ? <Loader size={20} color='#74b1a1'></Loader>
-                            : <img src={del} alt="X" onClick={() => clickHandler(uid)}></img>
-                    }
-                </div>
 
             </div>
             <div>
-                <div style={{ backgroundColor: hex }} className="showcase-color">
+                <div onMouseEnter={handleMouseHover} onMouseLeave={handleMouseHover} style={{ backgroundColor: hex }} className="showcase-color">
+                    <div className="center">
+                        {
+                            deleteLoader ? <div className="delete-color">
+                                <Loader size={25} color='#74b1a1'></Loader>
+                            </div>
+                                :
+                                hovering ? <div className="delete-color" onClick={() => clickHandler(uid)}>
+                                    <img className="center" src={del} alt="X" ></img>
+                                </div> : <></>
+                        }
+                    </div>
                 </div>
             </div>
             <div className="card_info">
