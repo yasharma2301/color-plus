@@ -5,7 +5,7 @@ import { WebSocketLink } from 'apollo-link-ws';
 import { getMainDefinition } from 'apollo-utilities';
 import { InMemoryCache } from 'apollo-boost';
 
-const secret = 'mKkmS5B1DfRVT3NHsGMQOfNJ2CQEnFJHQZRGjfR2LfxWKtUiMx2Mff0367JBIjcZ';
+const secret = process.env.REACT_APP_SECRET_KEY;
 
 // web socket link for apollo stream subscription
 const wsLink = new WebSocketLink({
