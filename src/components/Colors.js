@@ -2,39 +2,9 @@ import React, { useState } from 'react'
 import './css/color.css'
 import { useMutation } from '@apollo/react-hooks';
 import del from './assets/delete.png';
-import gql from 'graphql-tag';
-import HashLoader from "react-spinners/HashLoader";
 import './css/main.css'
-import { css } from '@emotion/core'
-
-const loaderCss = css`
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    text-align: center;
-`
-
-const TYPE_UPDATE = gql`
-    mutation Type_Update($uid: uuid!, $type: String!) {
-        update_colors(where: {uid: {_eq: $uid}}, _set: {type: $type}) {
-            returning {
-                type
-                uid
-                hex
-            }
-        }
-    }
-`
-
-const DELETE_COLOR = gql`
-    mutation MyMutation($uid: uuid!) {
-        delete_colors_by_pk(uid: $uid) {
-            uid
-        }
-    }
-`
+import Loader from './Loader'
+import {TYPE_UPDATE, DELETE_COLOR} from './QlRequests';
 
 function Colors({ uid, hex, type, index }) {
 
@@ -82,7 +52,7 @@ function Colors({ uid, hex, type, index }) {
                 </div>
                 <div className="delete-color">
                     {
-                        deleteLoader ? <HashLoader size={20} color='#74b1a1' css={loaderCss}></HashLoader>
+                        deleteLoader ? <Loader size={20} color='#74b1a1'></Loader>
                             : <img src={del} onClick={() => clickHandler(uid)}></img>
                     }
                 </div>

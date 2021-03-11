@@ -14,29 +14,6 @@ main {
     height: 100%;
 }
 
-input {
-    border: none;
-    -webkit-appearance: none;
-    -ms-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background: #f2f2f2;
-    padding: 6px;
-    border-radius: 6px;
-    width: 150px;
-    outline: none;
-    text-align: center;
-}
-
-input:focus::placeholder{
-    color: transparent;
-}
-
-input::placeholder{
-    color:#222;
-    transition: color 0.2s ease;
-}
-
 .center {
     position: absolute;
     left: 50%;

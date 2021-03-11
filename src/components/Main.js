@@ -1,28 +1,17 @@
 import React from 'react'
 import Add from './Add';
-import gql from 'graphql-tag';
 import { useSubscription } from '@apollo/react-hooks';
-import HashLoader from "react-spinners/HashLoader";
 import Colors from './Colors'
+import Loader from './Loader'
+import {COLOR_SUBSCRIPTION} from './QlRequests';
 
-const COLOR_SUBSCRIPTION = gql`
-    subscription Color_Subscription {
-        colors {
-            hex
-            type
-            uid
-        }
-    }
-`
 
 function Main() {
 
     const { data, error, loading } = useSubscription(COLOR_SUBSCRIPTION);
 
     if (loading) {
-        return <div className="center">
-            <HashLoader size={70} color='#74b1a1'></HashLoader>
-        </div>
+        return <Loader size={70} color='#74b1a1'></Loader>
     }
     if (error) {
         return <div className="center">

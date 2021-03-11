@@ -8,7 +8,7 @@ function Header() {
         <Fragment>
             <header className="navbar">
                 <div className="title container">
-                    <img className="logo" src={logo}></img>
+                    <img className="logo" src={logo} alt=""></img>
                     <h1>ColorPlus</h1>
                 </div>
             </header>

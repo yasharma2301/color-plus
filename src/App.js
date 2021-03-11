@@ -1,9 +1,6 @@
 import React from 'react'
-import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
-import logo from './logo.svg';
 import './App.css';
-import Colors from './components/Colors';
 import Header from './components/Header';
 import Main from './components/Main';
 import Footer from './components/Footer';

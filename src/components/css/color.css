@@ -3,7 +3,7 @@
     box-shadow:  0 0 10px rgba(0,0,0,0.2);
     -webkit-box-shadow:  0 0 3px rgba(0,0,0,0.2);
     background: white;
-    margin: 20px 0;
+    margin: 15px 0;
 }
 
 .card_info{
@@ -44,4 +44,27 @@
 
 .delete-color img{
     height: 25px;    
+}
+
+input:focus::placeholder{
+    color: transparent;
+}
+
+input::placeholder{
+    color:#222;
+    transition: color 0.2s ease;
+}
+
+input {
+    border: none;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: #f2f2f2;
+    padding: 6px;
+    border-radius: 6px;
+    width: 150px;
+    outline: none;
+    text-align: center;
 }
