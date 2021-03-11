@@ -27,4 +27,17 @@
     height: 220px;
     padding: 10px;
     border: 1px solid var(--outline-color);
+    position: relative;
+    z-index: 1;
+}
+
+.delete-color {
+    height: 25px;
+    background: #d6d6d688;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    text-align: center;
+    vertical-align: middle;
+    padding: 5px;
 }
