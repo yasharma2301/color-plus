@@ -8,7 +8,7 @@ import { InMemoryCache } from 'apollo-boost';
 const secret = 'mKkmS5B1DfRVT3NHsGMQOfNJ2CQEnFJHQZRGjfR2LfxWKtUiMx2Mff0367JBIjcZ';
 
 const wsLink = new WebSocketLink({
-  uri: 'ws://easy-mite-79.hasura.app/v1/graphql',
+  uri: 'wss://easy-mite-79.hasura.app/v1/graphql',
   options: {
     reconnect: true,
     connectionParams: {
