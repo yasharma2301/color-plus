@@ -1,8 +1,6 @@
 # Color-Plus
 Color Plus is a crud application made using react and graphql. Graphql subscriptions have been used for real time data.
 
-The project is deployed here: https://color-plus.herokuapp.com/
-
 ## Installation Steps
 
 Note that before using the command 'npm install' remove the 'package-lock.json' file and add '.env' file which consists the app secret.
